@@ -29,7 +29,7 @@ Thử các trạng thái giao diện:
 | `/my-assignments` | Danh sách 4 bài của S01 |
 | `/my-assignments?simulate=error` | Trạng thái lỗi |
 | `/my-assignments?simulate=empty` | Trạng thái rỗng |
-| `/my-assignments?studentId=S02` | Vẫn chỉ bài của S01 (tham số bị bỏ qua) |
+| `/api/my-assignments?studentId=S02` | JSON vẫn chỉ có A01–A04 (tham số bị bỏ qua) |
 
 API: `GET /api/my-assignments`
 
@@ -97,14 +97,14 @@ src/
 - `import "server-only"` cho các file trong `src/server/` (cần cấu hình thêm cho Vitest).
 - Nộp lại nhiều lần (lấy lần nộp gần nhất ≤ now).
 - Test giao diện (Testing Library / Playwright).
-- Kiểm tra định dạng ngày khi dữ liệu đến từ nguồn ngoài (vd zod) — hiện ngày sai định dạng sẽ bị coi là "Chưa nộp".
+- Kiểm tra định dạng ngày khi dữ liệu đến từ nguồn ngoài (vd zod) — hiện ngày sai định dạng không báo lỗi mà cho ra trạng thái sai.
 - Tắt `?simulate=` khi chạy production.
 - Icon (i) hiện giờ giả lập; nút "Thử lại" khi lỗi; sắp xếp/lọc theo trạng thái.
 
 ## Sử dụng AI
 
-<!-- SỬA THEO ĐÚNG THỰC TẾ CỦA BẠN -->
-Tôi dùng Claude (Claude Code) làm người hướng dẫn và review: giải thích khái niệm, gợi ý cách viết,
-review từng bước. Các quyết định thiết kế (lấy danh tính từ session, now cố định ở một chỗ, quy tắc
-23:59, nộp sau now, cấu trúc trạng thái) do tôi phân tích và chốt trước khi code. Tôi tự gõ lại và
-hiểu từng dòng code.
+Tôi dùng Claude (Claude Code) trong quá trình làm bài: AI gợi ý code mẫu kèm giải thích cho
+các bước, tôi gõ lại, chạy thử và chỉnh sửa; AI cũng review và chỉ ra lỗi sau mỗi bước.
+Các quyết định chính (danh tính lấy từ session ở server, "now" cố định ở một chỗ, quy tắc
+hạn 23:59) tôi phân tích và chốt trước khi bắt đầu làm bài; riêng phần xử lý bài nộp sau "now" tôi chốt khi viết hàm trạng thái.
+Tôi hiểu và giải thích được từng phần của bài.
