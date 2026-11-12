@@ -24,9 +24,9 @@ const STATUS_LABELS: Record<MainStatus, string> = {
 };
 
 const STATUS_STYLES: Record<MainStatus, string> = {
-    submitted: "bg-green-100 text-green-800",
-    overdue: "bg-red-100 text-red-800",
-    not_submitted: "bg-gray-100 text-gray-800",
+    submitted: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100",
+    overdue: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100",
+    not_submitted: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100",
 };
 
 const dateTimeFormat = new Intl.DateTimeFormat("vi-VN", {
@@ -72,20 +72,20 @@ export default function MyAssignmentsPage() {
         <main className="mx-auto w-full max-w-3xl px-4 py-8">
             <h1 className="mb-6 text-2xl font-bold">Bài tập của tôi</h1>
 
-            {state.kind === "loading" && <p className="text-gray-500">Đang tải…</p>}
+            {state.kind === "loading" && <p className="text-gray-500 dark:text-gray-400">Đang tải…</p>}
 
             {state.kind === "error" && (
-                <p role="alert" className="rounded-md bg-red-50 p-4 text-red-800">
+                <p role="alert" className="rounded-md bg-red-50 p-4 text-red-800 dark:bg-red-950 dark:text-red-200">
                     Không tải được danh sách bài tập. Vui lòng thử lại sau.
                 </p>
             )}
 
             {state.kind === "ready" && state.assignments.length === 0 && (
-                <p className="text-gray-500">Bạn chưa có bài tập nào.</p>
+                <p className="text-gray-500 dark:text-gray-400">Bạn chưa có bài tập nào.</p>
             )}
 
             {state.kind === "ready" && state.assignments.length > 0 && (
-                <ul className="divide-y divide-gray-200 rounded-lg border border-gray-200">
+                <ul className="divide-y divide-gray-200 rounded-lg border border-gray-200 dark:divide-gray-800 dark:border-gray-800">
                     {state.assignments.map((a) => (
                         <li
                             key={a.id}
@@ -93,11 +93,11 @@ export default function MyAssignmentsPage() {
                         >
                             <div>
                                 <p className="font-medium">{a.title}</p>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                     Hạn nộp: {formatDateTime(a.dueAt)}
                                 </p>
                                 {a.status === "submitted" && a.submittedAt && (
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">
                                         Nộp lúc: {formatDateTime(a.submittedAt)}
                                     </p>
                                 )}
@@ -109,7 +109,7 @@ export default function MyAssignmentsPage() {
                                     {STATUS_LABELS[a.status]}
                                 </span>
                                 {a.isLate && (
-                                    <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800">
+                                    <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800 dark:bg-amber-900 dark:text-amber-100">
                                         Nộp trễ
                                     </span>
                                 )}

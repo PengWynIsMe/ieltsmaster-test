@@ -73,7 +73,7 @@ describe("getAssignmentStatus — giờ nộp so với now", () => {
         ).toEqual({ status: "submitted", isLate: false });
     });
 
-    it("thay đổi now trước giờ nôp → tại now coi như chưa nộp", () => {
+    it("thay đổi now trước giờ nộp → tại now coi như chưa nộp", () => {
         const now = new Date("2026-11-09T12:00:00+07:00"); // dời now về TRƯỚC lúc nộp (10/11 20:00)
         expect(
             getAssignmentStatus({ dueAt: DUE, submittedAt: "2026-11-10T20:00:00+07:00" }, now),
